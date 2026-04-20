@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Bank | Console</title>
+    <style>
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #dff2f3 0%, #e2c3e9 100%);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #334155;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* Gradient Header */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-brand { display: flex; align-items: center; gap: 1rem; }
+        .icon-box { background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 8px; }
+        .header-title h1 { font-size: 1.25rem; font-weight: 700; margin: 0; }
+        .header-title p { font-size: 0.7rem; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* Main Layout */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .card-label { color: #94a3b8; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+        .card-value { font-size: 2.25rem; font-weight: 900; color: #0f172a; margin-top: 0.25rem; }
+        .card-footer { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; }
+        .text-green { color: #10b981; }
+
+        /* Actions and Table Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .details-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Table Style */
+        .table-container { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 24px; 
+            border: 1px solid #e2e8f0; 
+            overflow: hidden; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .table-header { padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        thead { background: #f8fafc; font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
+        th, td { padding: 1rem 2rem; }
+        tr { border-bottom: 1px solid #f1f5f9; }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; background: #d1fae5; color: #047857; }
+
+        /* Control Panel */
+        .control-panel { display: flex; flex-direction: column; gap: 1rem; }
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+        .btn-danger { background: #fff1f2; color: #e11d48; border-color: #fecdd3; }
+        .btn-danger:hover { background: #ffe4e6; }
+
+        /* Tech Guide Section */
+        .tech-guide {
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            backdrop-filter: blur(4px);
+        }
+
+        .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+        .guide-step h4 { font-size: 0.7rem; text-transform: uppercase; color: #2563eb; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .guide-step p { font-size: 0.85rem; color: #64748b; }
+
+        footer { 
+            padding: 2rem; 
+            text-align: center; 
+            color: #ffffff; 
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            font-size: 0.75rem; 
+            margin-top: 2rem; 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-brand">
+            <div class="icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
+            </div>
+            <div class="header-title">
+                <h1>Simple Bank</h1>
+                <p>Internal SQL Portal</p>
+            </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: bold;">ADMIN CONSOLE</div>
+    </header>
+
+    <main>
+        <div class="section-header">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Account Overview</h2>
+            <div id="current-time" style="font-size: 0.8rem; color: #64748b;"></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="card">
+                <div class="card-label">Total Vault Assets</div>
+                <div class="card-value">{balance}</div>
+                <div class="card-footer text-green">+2.4% SQL synced</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Total Received</div>
+                <div class="card-value">{received}</div>
+                <div class="card-footer" style="color: #64748b;">Current Session</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Total Withdrawn</div>
+                <div class="card-value">{withdrawn}</div>
+                <div class="card-footer" style="color: #64748b;">Pending Commit</div>
+            </div>
+        </div>
+
+        <div class="details-grid">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 style="font-weight: 700;">SQL Transaction Logs</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Details</th>
+                            <th>Amount</th>
+                            <th style="text-align: right;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {table_rows}
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="control-panel">
+                <div class="card" style="border-radius: 16px; padding: 1.25rem;">
+                    <h3 style="font-size: 0.9rem; margin-bottom: 1rem;">System Controls</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <button class="btn">Refresh Data</button>
+                        <button class="btn">Re-Index DB</button>
+                        <button class="btn">Security Audit</button>
+                        <button class="btn">User Logs</button>
+                        <button class="btn btn-danger">STOP SERVER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How it Happens Detail -->
+        <section class="tech-guide">
+            <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">How it Happens: OS to Browser Handshake</h3>
+            <div class="guide-grid">
+                <div class="guide-step">
+                    <h4>1. Python Logic</h4>
+                    <p>Python script runs locally on the OS, fetching raw variables from the SQL database. These are saved into memory as strings.</p>
+                </div>
+                <div class="guide-step">
+                    <h4>2. Template Injection</h4>
+                    <p>The script opens this file, finds placeholders like {balance}, and replaces them with real data before saving a temporary version.</p>
+                </div>
+                <div class="guide-step">
+                    <h4>3. OS Trigger</h4>
+                    <p>Using <code>os.path.abspath</code>, Python identifies the file path on your hard drive and sends it to the OS shell.</p>
+                </div>
+                <div class="guide-step">
+                    <h4>4. Browser Launch</h4>
+                    <p>The <code>webbrowser</code> module tells the OS to open your default browser directly to that local path, displaying the UI instantly.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Simple Bank Security Infrastructure. No Frameworks. Pure Style.</p>
+        <p style="margin-top: 0.5rem; letter-spacing: 0.2em; opacity: 0.8;">ENVIRONMENT: INTERNAL-DEV-SHELL</p>
+    </footer>
+
+    <script>
+// only time update
+function updateTime(){
+  document.getElementById('current-time').innerText = new Date().toLocaleString();
+}
+updateTime();
+setInterval(updateTime,1000);
+</script>
+</body>
+</html>
