@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Happy 4th Birthday Aahil!</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fredoka+One&family=Nunito:wght@800&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Nunito, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image: url('https://t4.ftcdn.net/jpg/05/87/96/65/360_F_587966589_OiUxd18RHKnYjcd4gLpZtPtZOse1Zee3.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #bfe8ff;
+    }
+
+    .floaters {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .fl {
+      position: absolute;
+      bottom: -60px;
+      user-select: none;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .fourth img {
+      width: min(100%);
+      height: 320px;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 28px rgba(128, 0, 128, .25));
+    }
+
+    .name {
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(4rem, 12vw, 7.5rem);
+      color: #ff1f1f;
+      line-height: 1;
+      display: block;
+      font-weight: 900;
+      text-shadow: 3px 3px 0 #ffffff, 0 2px 8px rgba(0, 0, 0, .22);
+    }
+
+    .age-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #fff7b8, #ffe7a3);
+      border: 3px solid #ffb300;
+      border-radius: 40px;
+      padding: 14px 30px;
+      margin: 14px 0;
+      box-shadow: 0 6px 20px rgba(255, 179, 0, .25);
+    }
+
+    .age-strip span {
+      font-family: "Fredoka One", cursive;
+      font-size: 1.5rem;
+      color: #ff1f1f;
+      text-shadow: 1px 1px 0 #ffffff;
+    }
+
+    .bal-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .bal-row img {
+      width: 180px;
+      height: 280px;
+      display: block;
+      mix-blend-mode: multiply;
+    }
+
+    .bal-row img:nth-child(2) {
+      width: 200px;
+      height: 280px;
+    }
+
+    /* WISH CARD */
+    .wish-wrap {
+      position: relative;
+      z-index: 2;
+      padding: 2px 2px 2px;
+    }
+
+    .wish-card {
+      max-width: 780px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(214, 110, 169, 0.96), rgba(236, 204, 232, 0.94));
+      border: 2px solid rgba(255, 255, 255, .75);
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: 0 12px 36px rgba(79, 121, 66, .12);
+    }
+
+    .wish-card p {
+      color: #dd0b0b;
+      font-size: 1.4rem;
+      line-height: 1.9;
+      text-align: center;
+      font-weight: 900;
+      text-shadow: none;
+    }
+
+    .hl {
+      color: #290202;
+      font-weight: 900;
+      font-size: 1.09em;
+    }
+
+    .hl2 {
+      color: hsl(0, 94%, 38%);
+      font-weight: 900;
+    }
+
+    /* SLIDER */
+    .slider-wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      padding: 0 10px;
+    }
+
+    .slider-label {
+      text-align: center;
+      font-family: "Dancing Script", cursive;
+      font-size: 2.8rem;
+      color: #c7170b;
+      margin-bottom: 14px;
+      font-weight: 900;
+      text-shadow: 0px 1px 1px #e2e60e, 0 2px 3px #000000;
+    }
+
+    .slide-area {
+      position: relative;
+      width: 90%;
+      height: 640px;
+      border: 2px solid #d40707;
+      border-radius: 22px;
+      overflow: hidden;
+
+      background: rgba(37, 26, 26, 0.1);
+      box-shadow: 1px 1px 2px #dbdf06, 0 6px 16px #660099;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+    }
+
+    .slide.on {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+
+      object-position: center;
+
+      border-radius: 18px;
+      background: transparent;
+    }
+
+    .counter {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      z-index: 10;
+      background: #660099;
+      color: #ffe600;
+      font-size: .8rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: #660099;
+      border: none;
+      color: #ffe600;
+      font-size: 1.5rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn.p {
+      left: 6px;
+    }
+
+    .btn.n {
+      right: 6px;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .thumb {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: .6;
+      transition: all .2s;
+    }
+
+    .thumb.on {
+      border-color: #ff1744;
+      opacity: 1;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #d10d0d;
+      text-shadow: 2px 2px 0 #1a1616;
+    }
+
+    footer span {
+      color: #ff1100;
+    }
+
+    /* MUSIC BUTTON */
+    #musicBtn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9998;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #03a00b, #010f0e);
+      color: #e7e40d;
+      font-family: "Fredoka One", cursive;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(123, 47, 247, .28);
+    }
+
+    .music-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(44, 18, 72, .26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .music-card {
+      width: min(92vw, 460px);
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #ff5f6d, #ffc371);
+      border: 3px solid rgba(255, 255, 255, .75);
+      box-shadow: 0 18px 40px rgba(70, 22, 100, .28);
+      animation: musicGlow 1.8s ease-in-out infinite;
+    }
+
+    .music-card img {
+      width: 100%;
+      height: 220px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .music-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 22px;
+      color: #fff;
+      font-family: "Fredoka One", cursive;
+      text-shadow: 2px 2px 0 rgba(92, 18, 78, .65), 0 0 12px rgba(0, 0, 0, .2);
+    }
+
+    .music-text small {
+      display: block;
+      font-size: .95rem;
+      margin-bottom: 10px;
+      color: #ecdd0c;
+      letter-spacing: .3px;
+    }
+
+    .music-text strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1.22;
+    }
+
+    @keyframes musicGlow {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 18px 40px rgba(70, 22, 100, .22);
+      }
+
+      50% {
+        transform: scale(1.015);
+        box-shadow: 0 22px 48px rgba(255, 95, 109, .34);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floaters" id="floaters"></div>
+
+  <div class="hero" style="mix-blend-mode: multiply;">
+    <div class="fourth">
+      <img src="https://media.tenor.com/faib4i1mdFQAAAAM/mona-wishing-you-all-the-best.gif" alt="Birthday wish"
+        style="mix-blend-mode:normal;">
+    </div>
+    <div class="name">Aahil</div>
+    <div class="age-strip">
+      <span>🎂</span>
+      <span>Turning 4 Years Old</span>
+      <span>🎂</span>
+    </div>
+    <div class="bal-row">
+      <img src="https://i.pinimg.com/originals/1e/0d/59/1e0d5943d61eb6a98d10a2e08303f5b3.gif" alt="birthday gif 1">
+      <img src="https://img1.picmix.com/output/stamp/normal/7/0/9/1/1801907_4b7ba.gif" alt="birthday gif 2">
+      <img src="https://media.tenor.com/Bcwt2CjVUtQAAAAM/happy-birthday.gif" alt="birthday gif 3">
+    </div>
+  </div>
+
+  <div class="wish-wrap">
+    <div class="wish-card">
+      <p>🌸 Today is a <span class="hl">magical day</span> — our precious little star <span class="hl">Aahil</span>
+        turns <span class="hl">4!</span> 🎉<br><br>
+        Four years of your <span class="hl2">laughter, curiosity &amp; endless charm</span> have made every heart
+        overflow with joy. 💛<br><br>
+        May Allah grant you <span class="hl">health, happiness</span> &amp; a beautiful life. Ameen 🤲<br><br>
+        <span class="hl">Happy 4th Birthday, Aahil! 🎂🎈</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="slider-wrap">
+    <div class="slider-label">🎀 Aahil's Moments 🎀</div>
+    <div class="slide-area" id="sa">
+      <span class="counter" id="cnt">1 / 5</span>
+      <button class="btn p" onclick="go(-1)">&#8249;</button>
+      <button class="btn n" onclick="go(1)">&#8250;</button>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <footer>Made with <span>♥</span> for Aahil's 4th Birthday 🎈</footer>
+
+  <div class="music-overlay" id="musicOverlay" onclick="tryStart()">
+    <div class="music-card">
+      <img
+        src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyZzdvNnV4c3h3MnBjdzhjNDEzaXZkZzFlY3hhcXZ2bW9iZmszdjAxOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/20cS04roeYZcVXAypm/giphy.gif"
+        alt="Birthday cake gif">
+      <div class="music-text">
+        <small>Click to see music 🎵</small>
+        <strong>Tap to Start<br>Birthday Music!</strong>
+      </div>
+    </div>
+  </div>
+  <button id="musicBtn" onclick="toggleMusic()">⏸ Stop Music</button>
+
+  <script>
+    // ── SLIDER ──────────────────────────────────────────────────────────────────
+    const PHOTO_URLS = [
+      'https://raw.githubusercontent.com/Afsana721/asef/main/Aahil1.png',
+      'https://raw.githubusercontent.com/Afsana721/asef/main/Aahil2.png',
+      'https://raw.githubusercontent.com/Afsana721/asef/main/Aahil3.png',
+      'https://raw.githubusercontent.com/Afsana721/asef/main/Aahil4.png',
+      'https://raw.githubusercontent.com/Afsana721/asef/main/Aahil5.png'
+    ];
+    const sa = document.getElementById('sa');
+    const tb = document.getElementById('thumbs');
+    PHOTO_URLS.forEach((url, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide' + (i === 0 ? ' on' : '');
+      slide.innerHTML = `<img src="${url}" alt="slide ${i + 1}">`;
+      sa.appendChild(slide);
+      const d = document.createElement('div');
+      d.className = 'thumb' + (i === 0 ? ' on' : '');
+      const img = document.createElement('img');
+      img.src = url; d.appendChild(img);
+      d.onclick = () => show(i);
+      tb.appendChild(d);
+    });
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let cur = 0;
+    function show(i) {
+      slides[cur].classList.remove('on');
+      cur = (i + total) % total;
+      slides[cur].classList.add('on');
+      document.getElementById('cnt').textContent = (cur + 1) + ' / ' + total;
+      document.querySelectorAll('.thumb').forEach((t, idx) => t.classList.toggle('on', idx === cur));
+    }
+    function go(d) { show(cur + d); }
+    let autoSlide;
+    function startAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => show(cur + 1), 3000); }
+    function stopAuto() { clearInterval(autoSlide); }
+    startAuto();
+    sa.addEventListener('mouseenter', stopAuto);
+    sa.addEventListener('mouseleave', startAuto);
+    document.getElementById('cnt').textContent = '1 / ' + total;
+
+    // ── WEB AUDIO — SOFT HAPPY BIRTHDAY ─────────────────────────────────────────
+    let ctx = null, playing = false, loopRef = null;
+    const BPM = 140, B = 60 / BPM;
+    const M = [
+      [523, .75], [523, .25], [587, 1], [523, 1], [698, 1], [659, 2],
+      [523, .75], [523, .25], [587, 1], [523, 1], [784, 1], [698, 2],
+      [523, .75], [523, .25], [1047, 1], [880, 1], [698, 1], [659, 1], [587, 1],
+      [932, .75], [932, .25], [880, 1], [698, 1], [784, 1], [698, 3]
+    ];
+
+    function playSong() {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1100, ctx.currentTime);
+      filter.Q.setValueAtTime(0.7, ctx.currentTime);
+
+      const convolver = ctx.createConvolver();
+      const rate = ctx.sampleRate, len = rate * 1.5;
+      const ir = ctx.createBuffer(2, len, rate);
+      for (let c = 0; c < 2; c++) {
+        const d = ir.getChannelData(c);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3);
+      }
+      convolver.buffer = ir;
+      const reverbGain = ctx.createGain();
+      reverbGain.gain.setValueAtTime(0.28, ctx.currentTime);
+
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.45, ctx.currentTime);
+
+      filter.connect(master);
+      master.connect(ctx.destination);
+      master.connect(convolver);
+      convolver.connect(reverbGain);
+      reverbGain.connect(ctx.destination);
+
+      function n(freq, start, dur, vol) {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(freq, start);
+        g.gain.setValueAtTime(0, start);
+        g.gain.linearRampToValueAtTime(vol, start + 0.06);
+        g.gain.exponentialRampToValueAtTime(0.001, start + dur);
+        o.connect(g); g.connect(filter);
+        o.start(start); o.stop(start + dur + 0.05);
+      }
+
+      let t = ctx.currentTime + 0.1, totalDur = 0;
+      M.forEach(([f, d]) => {
+        const dur = d * B;
+        n(f, t, dur * 1.1, 0.5);
+        n(f * 0.75, t, dur * 1.1, 0.2);
+        n(f * 0.5, t, dur * 1.1, 0.15);
+        t += dur;
+        totalDur += dur;
+      });
+
+      loopRef = setTimeout(() => {
+        if (playing) { ctx.close(); ctx = null; playSong(); }
+      }, totalDur * 1000 - 100);
+    }
+
+    function stopSong() {
+      clearTimeout(loopRef);
+      if (ctx) { ctx.close(); ctx = null; }
+    }
+
+    function startMusic() {
+      if (playing) return;
+      playing = true;
+      playSong();
+      const btn = document.getElementById('musicBtn');
+      btn.textContent = '⏸ Stop Music';
+      btn.classList.remove('stopped');
+    }
+
+    function toggleMusic() {
+      const btn = document.getElementById('musicBtn');
+      if (playing) {
+        playing = false;
+        stopSong();
+        btn.textContent = '🎵 Play Music';
+        btn.classList.add('stopped');
+      } else {
+        playing = true;
+        playSong();
+        btn.textContent = '⏸ Stop Music';
+        btn.classList.remove('stopped');
+      }
+    }
+
+    // ── TAP-TO-START OVERLAY ─────────────────────────────────────────────────────
+    function tryStart() {
+      const overlay = document.getElementById('musicOverlay');
+      if (overlay) {
+        overlay.style.transition = 'opacity .35s ease';
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.remove(), 360);
+      }
+      startMusic();
+    }
+
+    // ── FLOATERS ─────────────────────────────────────────────────────────────────
+    const emojis = ['🎈', '🎉', '🎂', '⭐', '✨', '🎁', '💖', '🥳', '💜', '🟣', '🎊', '🌟', '🧸', '🍭', '🍬', '🧁'];
+    const fc = document.getElementById('floaters');
+    function addFloat() {
+      const e = document.createElement('span');
+      e.className = 'fl';
+      e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      e.style.left = Math.random() * 100 + '%';
+      e.style.fontSize = (32 + Math.random() * 28) + 'px';
+      fc.appendChild(e);
+      const dur = 7000 + Math.random() * 5000;
+      const drift = (Math.random() * 140) - 70;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        e.style.transform = `translate(${drift * p}px,${-window.innerHeight * 1.2 * p}px) rotate(${p * 200}deg)`;
+        e.style.opacity = String(1 - p);
+        if (p < 1) requestAnimationFrame(step); else e.remove();
+      }
+      requestAnimationFrame(step);
+    }
+    setInterval(addFloat, 400);
+    for (let i = 0; i < 22; i++) setTimeout(addFloat, i * 100);
+  </script>
+</body>
+
+</html>
