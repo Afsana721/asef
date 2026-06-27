@@ -8,6 +8,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fredoka+One&family=Nunito:wght@800&display=swap"
     rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * {
       margin: 0;
@@ -23,7 +24,7 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      background-color: #bfe8ff;
+
     }
 
     .floaters {
@@ -47,13 +48,16 @@
       text-align: center;
     }
 
-    .fourth img {
-      width: min(100%);
-      height: 320px;
-      display: block;
-      margin: 0 auto;
-      filter: drop-shadow(0 10px 28px rgba(128, 0, 128, .25));
-    }
+  .fourth img {
+    width: 100%;
+    max-width: 1100px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 10px 28px rgba(128, 0, 128, .25));
+    mix-blend-mode: multiply;
+    background: transparent;
+  }
 
     .name {
       font-family: "Dancing Script", cursive;
@@ -106,97 +110,133 @@
 
     /* WISH CARD */
     .wish-wrap {
-      position: relative;
-      z-index: 2;
-      padding: 2px 2px 2px;
-    }
+  position: relative;
+  z-index: 2;
+  padding: 20px 12px 12px;
+  margin-top: 10px;
+}
 
     .wish-card {
-      max-width: 780px;
-      margin: 0 auto;
-      background: linear-gradient(180deg, rgba(214, 110, 169, 0.96), rgba(236, 204, 232, 0.94));
-      border: 2px solid rgba(255, 255, 255, .75);
-      border-radius: 24px;
-      padding: 28px 32px;
-      box-shadow: 0 12px 36px rgba(79, 121, 66, .12);
-    }
+  max-width: 940px;
+  margin: 0 auto;
+  background-image: url('https://i.pinimg.com/736x/0f/21/00/0f2100d6812f3d9403c15d7d6cc5290e.jpg');
+  border: 2px solid rgba(15, 0, 0, 0.42);
+  border-radius: 30px;
+  padding: 34px 42px;
+  box-shadow: 6px 14px 12px #cf9393;
+  position: relative;
+  overflow: hidden;
+}
+.wish-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 18%, rgba(255,255,255,.26) 50%, rgba(255,255,255,0) 82%);
+  transform: translateX(-130%);
+  animation: wishShine 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
 
     .wish-card p {
-      color: #dd0b0b;
-      font-size: 1.4rem;
-      line-height: 1.9;
-      text-align: center;
-      font-weight: 900;
-      text-shadow: none;
-    }
+  color: #a3152f;
+  font-size: 1.42rem;
+  line-height: 2;
+  text-align: center;
+  font-weight: 900;
+  font-family: "Fredoka One", cursive;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+}
 
     .hl {
-      color: #290202;
-      font-weight: 900;
-      font-size: 1.09em;
-    }
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffd86f, #fff0b3, #ffe2a8);
+  color: #111111;
+  font-weight: 900;
+  font-size: 1.16em;
+  letter-spacing: .2px;
+  box-shadow: 0 6px 16px rgba(255,180,67,.20);
+  text-shadow: 0 1px 0 rgba(255,255,255,.85), 0 0 8px rgba(192,192,192,.65);
+  -webkit-text-stroke: .35px #c0c0c0;
+  animation: magicalGlow 2.2s ease-in-out infinite;
+}
 
     .hl2 {
-      color: hsl(0, 94%, 38%);
-      font-weight: 900;
-    }
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffe4ef, #fff5fa);
+  color: #cc2f5c;
+  font-weight: 900;
+  font-size: 1.08em;
+  box-shadow: 0 6px 16px rgba(255,120,170,.12);
+}
 
-    /* SLIDER */
-    .slider-wrap {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      margin: 0 auto 40px;
-      padding: 0 10px;
-    }
+  /* SLIDER */
+  .slider-wrap{
+  position:relative;
+  z-index:2;
+  max-width:960px;
+  margin:18px auto 40px;
+  padding:22px 18px 18px;
+  text-align:center;
+}
 
-    .slider-label {
-      text-align: center;
-      font-family: "Dancing Script", cursive;
-      font-size: 2.8rem;
-      color: #c7170b;
-      margin-bottom: 14px;
-      font-weight: 900;
-      text-shadow: 0px 1px 1px #e2e60e, 0 2px 3px #000000;
-    }
+  .slider-label{
+  text-align:center;
+  font-family:"Dancing Script",cursive;
+  font-size:3.2rem;
+  font-weight:900;
+  color:#8b001b;
+  letter-spacing:.5px;
+  margin-bottom:20px;
+  text-shadow:0 2px 0 #fff3f7, 0 6px 14px rgba(139,0,27,.22), 0 0 18px rgba(255,255,255,.35);
+}
+
 
     .slide-area {
-      position: relative;
-      width: 90%;
-      height: 640px;
-      border: 2px solid #d40707;
-      border-radius: 22px;
-      overflow: hidden;
-
-      background: rgba(37, 26, 26, 0.1);
-      box-shadow: 1px 1px 2px #dbdf06, 0 6px 16px #660099;
-    }
+  position: relative;
+  width: 100%;
+  height: 660px;
+  border: 3px solid #FFD700;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,245,250,.34), rgba(255,249,238,.26));
+  box-shadow: 0 16px 34px rgba(120,50,120,.10), 0 8px 22px rgba(255,215,0,.18);
+}
 
     .slide {
-      display: none;
-      width: 100%;
-    }
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
 
-    .slide.on {
-      display: block;
-    }
+.slide.on {
+  display: flex;
+}
 
     .slide img {
-      width: 100%;
-      height: 100%;
+  width: auto;
+  height: 100%;
+  max-width: 96%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border-radius: 18px;
+  background: transparent;
+}
 
-      object-position: center;
-
-      border-radius: 18px;
-      background: transparent;
-    }
-
-    .counter {
+  .counter {
       position: absolute;
       top: 8px;
       right: 10px;
       z-index: 10;
-      background: #660099;
+      background: #e08080;
       color: #ffe600;
       font-size: .8rem;
       font-weight: 900;
@@ -232,28 +272,30 @@
     }
 
     .thumbs {
-      display: flex;
-      gap: 7px;
-      justify-content: center;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
 
     .thumb {
-      width: 46px;
-      height: 46px;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      border: 2px solid transparent;
-      opacity: .6;
-      transition: all .2s;
-    }
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: .72;
+  transition: all .2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
 
     .thumb.on {
-      border-color: #ff1744;
-      opacity: 1;
-    }
+  border-color: #ff3154;
+  opacity: 1;
+  box-shadow: 0 6px 16px rgba(255,49,84,.18);
+}
 
     .thumb img {
       width: 100%;
@@ -286,8 +328,8 @@
       border: none;
       border-radius: 999px;
       padding: 12px 18px;
-      background: linear-gradient(135deg, #03a00b, #010f0e);
-      color: #e7e40d;
+      background: linear-gradient(135deg, #FF0800);
+      color: #fff5fa;
       font-family: "Fredoka One", cursive;
       font-size: 1rem;
       cursor: pointer;
@@ -307,7 +349,7 @@
     }
 
     .music-card {
-      width: min(92vw, 460px);
+      width: min(92vw, 660px);
       border-radius: 28px;
       overflow: hidden;
       position: relative;
@@ -319,9 +361,9 @@
 
     .music-card img {
       width: 100%;
-      height: 220px;
+      height: 440px;
       display: block;
-      object-fit: cover;
+      
     }
 
     .music-text {
@@ -340,7 +382,7 @@
 
     .music-text small {
       display: block;
-      font-size: .95rem;
+      font-size: 1.25rem;
       margin-bottom: 10px;
       color: #ecdd0c;
       letter-spacing: .3px;
@@ -353,18 +395,46 @@
     }
 
     @keyframes musicGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 18px 40px rgba(70, 22, 100, .22);
+  }
+  50% {
+    transform: scale(1.015);
+    box-shadow: 0 22px 48px rgba(255, 95, 109, .34);
+  }
+}
 
-      0%,
-      100% {
-        transform: scale(1);
-        box-shadow: 0 18px 40px rgba(70, 22, 100, .22);
-      }
+@keyframes softPop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
 
-      50% {
-        transform: scale(1.015);
-        box-shadow: 0 22px 48px rgba(255, 95, 109, .34);
-      }
-    }
+@keyframes magicalGlow {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 6px 16px rgba(255,67,112,.18);
+    filter: saturate(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 22px rgba(255,67,112,.32);
+    filter: saturate(1.12);
+  }
+}
+
+@keyframes wishShine {
+  0%, 70%, 100% {
+    transform: translateX(-130%);
+  }
+  30% {
+    transform: translateX(130%);
+  }
+}
   </style>
 </head>
 
@@ -372,9 +442,8 @@
   <div class="floaters" id="floaters"></div>
 
   <div class="hero" style="mix-blend-mode: multiply;">
-    <div class="fourth">
-      <img src="https://media.tenor.com/faib4i1mdFQAAAAM/mona-wishing-you-all-the-best.gif" alt="Birthday wish"
-        style="mix-blend-mode:normal;">
+    <div class="fourth" style="mix-blend-mode: multiply;">
+      <img src="https://media.tenor.com/faib4i1mdFQAAAAM/mona-wishing-you-all-the-best.gif" alt="Birthday wish">
     </div>
     <div class="name">Aahil</div>
     <div class="age-strip">
@@ -401,7 +470,7 @@
     </div>
   </div>
 
-  <div class="slider-wrap">
+  <div class="slider-wrap mt-8" >
     <div class="slider-label">🎀 Aahil's Moments 🎀</div>
     <div class="slide-area" id="sa">
       <span class="counter" id="cnt">1 / 5</span>
